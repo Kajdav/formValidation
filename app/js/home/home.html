@@ -2,19 +2,79 @@
 	<div class='login-signup-menu'>
 		<ul>
 			<!-- Links for toggeling login and signup forms -->
-			<li>Login</li>
-			<li>Signup</li>
+			<li ng-click='toggleShowLogin()'>Login</li>
+			<li ng-click='toggleShowSignup()'>Signup</li>
 		</ul>
 	</div>
 	<div class='forms-container'>
 		
 		<!-- Login Form -->
-		<div class='login-signup-form' ng-controller='loginCtrl'>
+		<div ng-show='showLogin' class='login-signup-form' ng-controller='loginCtrl'>
+			<form role='form' name='loginForm' novalidate>
+				<div class="form-group" show-errors>
+	    			<label for="input-email">Email Address</label>
+	    			<input type="email" class="form-control" id="input-email" name='inputEmail' placeholder="Enter email" required  ng-model='inputEmail' ng-minlength=6 required>
+	    			<p class='error' ng-if='loginForm.inputEmail.$invalid && loginClick === true'>Email must be at least 6 characters.</p>
+	  			</div>
+	  			<div class="form-group">
+				    <label for="input-password">Password</label>
+				    <input type="password" class="form-control" id="input-password" name='inputPassword' ng-model='inputPassword' placeholder='Password' ng-minlength=6 required>
+				    <p class='error' ng-if='loginForm.inputPassword.$invalid && loginClick === true'>Password must be at least 6 characters.</p>
+				</div>
+				<button type='submit' class='btn btn-default' ng-click='loginClick = true'>Submit</button>
+			</form>
 			<!-- LOGIN FORM CODE GOES HERE -->
 		</div>
 
 		<!-- Signup Form -->
-		<div class='login-signup-form' ng-controller='signupCtrl'>
+		<div ng-show='showSignup' class='login-signup-form' ng-controller='signupCtrl'>
+			<form class='form' name='signupForm'>
+				<div class='form-group'>
+					<label for='input-name'>Name</label>
+					<input type='text' class='form-control' id='inputFirstName' name='inputFirstName' ng-model='inputFirstName' placeholder='First' required ng-minlength=10>
+					<input type='text' class='form-control' id='inputLastName' name='inputLastName' ng-model='inputLastName' placeholder='Last' required ng-minlength=10>
+					<p class='error' ng-if='(signupForm.inputFirstName.$invalid || signupForm.inpuitLastName.$invalid) && signupClick === true'>Name required</p>
+				</div>
+				<div class="form-group">
+	    			<label for="input-email">Email Address</label>
+	    			<input type="email" class="form-control" id="input-email" placeholder="Enter email" required>
+	  			</div>
+	  			<div class="form-group">
+				    <label for="input-password">Password</label>
+				    <input type="password" class="form-control" id="input-password" placeholder="Password" required>
+				    <input type="password" class="form-control" id="input-password" placeholder="Repeat Password" required>
+				</div>
+				<div class='form-group'>
+					<label for='input-demographics'>About You</label>
+					<input type='number' class='form-control' id='input-age' placeholder='Age'>
+					<select class="form-control" placeholder='Location'>
+						<option>United States</option>
+						<option>Canada</option>
+						<option>Europe</option>
+						<option>Asia</option>
+						<option>South America</option>
+						<option>Other</option>
+					</select>
+					<div class="radio">
+					  	<label>
+					    	<input type="radio" name="optionsRadios" id="input-sex-male" value="male" checked>
+					   		Male
+					  	</label>
+					</div>
+					<div class="radio">
+					  	<label>
+					    	<input type="radio" name="optionsRadios" id="input-sex-female" value="female">
+					    	Female
+					  	</label>
+					<div class="radio">
+					  	<label>
+					    	<input type="radio" name="optionsRadios" id="input-sex-other" value="other">
+					    	Other or care not to specify
+					  	</label>
+					</div>
+				</div>
+				<button type='submit' class='btn btn-default' ng-click='signupClick = true'>Submit</button>
+			</form>
 		<!-- SIGNUP FORM CODE GOES HERE -->
 		</div>
 
